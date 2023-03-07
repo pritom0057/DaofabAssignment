@@ -2,6 +2,7 @@ package com.assignment.controller;
 
 import com.assignment.dto.response.ParentAmount;
 import com.assignment.service.IDaoFabService;
+import com.assignment.utils.Constants;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,7 +25,7 @@ public class DaoFabParentTransController {
 
     @GetMapping("/data")
     public ResponseEntity<List<ParentAmount>> fetchAllParentAmount(@RequestParam(name = "page_no", required = true) Integer pageNo) {
-        var parentAmounts = daoFabService.fetchAllParentAmount(pageNo, 2);
+        var parentAmounts = daoFabService.fetchAllParentAmount(pageNo, Constants.PAGE_SIZE);
         return Optional.ofNullable(parentAmounts)
                        .map(ResponseEntity::ok)
                        .orElseGet(() -> new ResponseEntity(HttpStatus.NO_CONTENT));
